@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Denoising App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<div class="container">
+    <h2>Login</h2>
+    <form method="POST">
+        <input type="text" name="username" placeholder="Username"
+               pattern="[a-zA-Z0-9_]{3,20}"
+               title="3-20 characters, letters, numbers, and underscore only"
+               required>
+        <input type="password" name="password" placeholder="Password"
+               minlength="8"
+               pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}"
+               title="Minimum 8 characters with at least 1 uppercase, 1 lowercase, and 1 number"
+               required>
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{{ url_for('signup') }}">Signup here</a></p>
+</div>
+</body>
+</html>

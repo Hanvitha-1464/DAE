@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Denoising App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Optional: extra styling for metrics table */
+        .metrics-section {
+            margin-top: 30px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .metrics-section h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .metrics-table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .metrics-table th, .metrics-table td {
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .metrics-table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .metrics-table td {
+            background-color: #f9f9f9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<div class="container" style="max-width: 1000px;">
+    <div class="dashboard-header">
+        <h2>Welcome, {{ session.get('name', session.get('username')) }}!</h2>
+        <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+    </div>
+
+    <div class="upload-section">
+        <h3>Upload an image to denoise</h3>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file"
+                   accept=".jpg,.jpeg,.png,.bmp,.tiff"
+                   required>
+            <button type="submit">Upload & Denoise</button>
+        </form>
+    </div>
+
+    {% if uploaded_image %}
+    <div class="images">
+        <div>
+            <h4>Noisy Image</h4>
+            <img src="{{ uploaded_image }}" alt="Noisy Image">
+        </div>
+        <div>
+            <h4>Reconstructed Image</h4>
+            <img src="{{ output_image }}" alt="Denoised Image">
+        </div>
+    </div>
+
+    <!-- ✅ Metrics Section -->
+    {% if metrics %}
+    <div class="metrics-section">
+        <h3>Image Quality Metrics</h3>
+        <table class="metrics-table">
+            <tr><th>Metric</th><th>Value</th></tr>
+            <tr><td>PSNR (Peak Signal-to-Noise Ratio)</td><td>{{ metrics.PSNR }}</td></tr>
+            <tr><td>MSE (Mean Squared Error)</td><td>{{ metrics.MSE }}</td></tr>
+            <tr><td>SSIM (Structural Similarity Index)</td><td>{{ metrics.SSIM }}</td></tr>
+        </table>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+</body>
+</html>

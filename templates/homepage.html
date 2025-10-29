@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Denoising </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="landing-page">
+   
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon"></span>
+                <span class="logo-text">ImageDenoise Website</span>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('login') }}" class="nav-btn-login">Login</a>
+                <a href="{{ url_for('signup') }}" class="nav-btn-signup">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="homepage-hero">
+        <div class="homepage-card">
+            <h1 class="project-title">Implementation of RGB Dimensionality Reduction Techniques using a Denoising Autoencoder</h1>
+
+            <div class="team-number">Team Number: 7</div>
+
+            <div class="team-members-list">
+                <div class="member-item">
+                    <span class="member-name">Ankita A</span>
+                    <span class="member-id">231IT007</span>
+                </div>
+                <div class="member-item">
+                    <span class="member-name">Nelluri Thanmaya Sri</span>
+                    <span class="member-id">231IT043</span>
+                </div>
+                <div class="member-item">
+                    <span class="member-name">Peteti Hanvitha</span>
+                    <span class="member-id">231IT048</span>
+                </div>
+            </div>
+
+            <div class="homepage-actions">
+                <a href="{{ url_for('signup') }}" class="btn-get-started">Get Started</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="what-we-do-section">
+        <div class="section-container">
+            <h2 class="section-title">What Our Application Does</h2>
+            <p class="section-subtitle">Transform noisy images into reconstructed images </p>
+
+            <div class="features-grid-simple">
+                <div class="feature-box">
+                    <div class="feature-icon-large">🎯</div>
+                    <h3>Noise Reduction</h3>
+                    <p>Remove unwanted noise from your images while preserving important details and image quality using our CNN-based denoising autoencoder.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-large">🚀</div>
+                    <h3>Fast Processing</h3>
+                    <p>Upload your noisy image and get a denoised result in seconds. Our optimized neural network ensures quick processing without compromising quality.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-large">🎨</div>
+                    <h3>RGB Enhancement</h3>
+                    <p>Advanced dimensionality reduction techniques preserve color accuracy while removing noise from all RGB channels simultaneously.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-large">💡</div>
+                    <h3>Deep Learning Powered</h3>
+                    <p>Built with TensorFlow and Keras, our convolutional autoencoder learns to effectively separate noise from meaningful image content.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-large">📁</div>
+                    <h3>Multiple Formats</h3>
+                    <p>Support for various image formats including PNG, JPEG.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-large">🔒</div>
+                    <h3>Secure & Private</h3>
+                    <p>Your images are processed securely with user authentication. All uploads are handled with privacy and security in mind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="how-it-works-section">
+        <div class="section-container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up / Login</h3>
+                    <p>Create your account or login to access the denoising dashboard</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <h3>Upload Image</h3>
+                    <p>Select and upload your noisy image from your device</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <p>Our autoencoder removes noise while preserving details</p>
+                </div>
+                <div class="step-arrow">→</div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <h3>Download Result</h3>
+                    <p>View and download your enhanced, noise-free image</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section-simple">
+        <div class="cta-content-simple">
+            <h2>Ready to Enhance Your Images?</h2>
+            <a href="{{ url_for('signup') }}" class="btn-cta-simple">Get Started </a>
+        </div>
+    </section>
+
+   
+    <footer class="footer-simple">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🖼️</span>
+                        <span class="logo-text">ImageDenoise</span>
+                    </div>
+                    <p class="footer-description">Image denoising using advanced autoencoder technology</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <a href="{{ url_for('login') }}">Login</a>
+                        <a href="{{ url_for('signup') }}">Sign Up</a>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Project Info</h4>
+                        <p class="footer-text">Team Number: 7</p>
+                        <p class="footer-text">RGB Dimensionality Reduction</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-divider"></div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 ImageDenoise- Team 7 Project</p>
+                <p>• Ankita A • Nelluri Thanmaya Sri • Peteti Hanvitha</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
