@@ -11,7 +11,7 @@ body {
 
 /* Default body for form pages (login/signup/dashboard) */
 body:not(.landing-page) {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -47,15 +47,15 @@ body:not(.landing-page) {
 }
 
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border-left: 4px solid #28a745;
+    background-color: #d1fae5;
+    color: #065f46;
+    border-left: 4px solid #10b981;
 }
 
 .alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-left: 4px solid #dc3545;
+    background-color: #fee2e2;
+    color: #991b1b;
+    border-left: 4px solid #ef4444;
 }
 
 @keyframes slideIn {
@@ -97,7 +97,7 @@ body:not(.landing-page) {
     gap: 0.5rem;
     font-size: 1.3rem;
     font-weight: 700;
-    color: #667eea;
+    color: #0891b2;
 }
 
 .logo-icon {
@@ -113,21 +113,21 @@ body:not(.landing-page) {
 .nav-btn-login {
     padding: 0.6rem 1.8rem;
     border-radius: 25px;
-    border: 2px solid #667eea;
-    color: #667eea;
+    border: 2px solid #0891b2;
+    color: #0891b2;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
 }
 
 .nav-btn-login:hover {
-    background: rgba(102, 126, 234, 0.1);
+    background: rgba(8, 145, 178, 0.1);
 }
 
 .nav-btn-signup {
     padding: 0.6rem 1.8rem;
     border-radius: 25px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #06b6d4 0%, #f43f5e 100%);
     color: white;
     text-decoration: none;
     font-weight: 600;
@@ -136,7 +136,7 @@ body:not(.landing-page) {
 
 .nav-btn-signup:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.4);
 }
 
 /* HOMEPAGE HERO SECTION */
@@ -146,7 +146,7 @@ body:not(.landing-page) {
     align-items: center;
     justify-content: center;
     padding: 100px 2rem 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%);
 }
 
 .homepage-card {
@@ -170,7 +170,7 @@ body:not(.landing-page) {
 
 .team-number {
     display: inline-block;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #06b6d4 0%, #f43f5e 100%);
     color: white;
     padding: 1rem 3rem;
     border-radius: 50px;
@@ -188,14 +188,14 @@ body:not(.landing-page) {
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 2rem;
-    background: #f8f9fa;
+    background: #f0fdfa;
     border-radius: 12px;
     margin-bottom: 1rem;
     transition: all 0.3s ease;
 }
 
 .member-item:hover {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #ccfbf1 0%, #fce7f3 100%);
     transform: translateX(10px);
 }
 
@@ -207,7 +207,7 @@ body:not(.landing-page) {
 
 .member-id {
     font-size: 1.1rem;
-    color: #667eea;
+    color: #0891b2;
     font-weight: 600;
 }
 
@@ -217,7 +217,7 @@ body:not(.landing-page) {
 
 .btn-get-started {
     padding: 1rem 3rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #06b6d4 0%, #f43f5e 100%);
     color: white;
     text-decoration: none;
     border-radius: 50px;
@@ -225,18 +225,18 @@ body:not(.landing-page) {
     font-weight: 700;
     display: inline-block;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
 }
 
 .btn-get-started:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
 }
 
 /* WHAT WE DO SECTION */
 .what-we-do-section {
     padding: 5rem 2rem;
-    background: #f8f9fa;
+    background: #f0fdfa;
 }
 
 .section-container {
@@ -272,16 +272,41 @@ body:not(.landing-page) {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     text-align: center;
+    border-top: 4px solid transparent;
+}
+
+.feature-box:nth-child(1) {
+    border-top-color: #06b6d4;
+}
+
+.feature-box:nth-child(2) {
+    border-top-color: #f43f5e;
+}
+
+.feature-box:nth-child(3) {
+    border-top-color: #8b5cf6;
 }
 
 .feature-box:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(102, 126, 234, 0.15);
+    box-shadow: 0 12px 24px rgba(6, 182, 212, 0.15);
 }
 
 .feature-icon-large {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
+}
+
+.feature-box:nth-child(1) .feature-icon-large {
+    color: #06b6d4;
+}
+
+.feature-box:nth-child(2) .feature-icon-large {
+    color: #f43f5e;
+}
+
+.feature-box:nth-child(3) .feature-icon-large {
+    color: #8b5cf6;
 }
 
 .feature-box h3 {
@@ -326,13 +351,13 @@ body:not(.landing-page) {
 
 .step-item:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 8px 20px rgba(6, 182, 212, 0.2);
 }
 
 .step-number {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #06b6d4 0%, #f43f5e 100%);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -358,14 +383,14 @@ body:not(.landing-page) {
 
 .step-arrow {
     font-size: 2rem;
-    color: #667eea;
+    color: #0891b2;
     font-weight: bold;
 }
 
 /*CTA SECTION*/
 .cta-section-simple {
     padding: 5rem 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #0e7490 100%);
     text-align: center;
 }
 
@@ -391,7 +416,7 @@ body:not(.landing-page) {
 .btn-cta-simple {
     padding: 1.2rem 3rem;
     background: white;
-    color: #667eea;
+    color: #0891b2;
     text-decoration: none;
     border-radius: 50px;
     font-size: 1.2rem;
@@ -404,11 +429,12 @@ body:not(.landing-page) {
 .btn-cta-simple:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: #fef2f2;
 }
 
 /*FOOTER*/
 .footer-simple {
-    background: #2d3748;
+    background: #164e63;
     color: white;
     padding: 3rem 2rem 2rem;
 }
@@ -468,7 +494,7 @@ body:not(.landing-page) {
 }
 
 .footer-column a:hover {
-    color: white;
+    color: #06b6d4;
 }
 
 .footer-text {
@@ -533,12 +559,12 @@ input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="file"]:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #06b6d4;
 }
 
 button[type="submit"] {
     padding: 15px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #06b6d4 0%, #f43f5e 100%);
     color: white;
     border: none;
     border-radius: 8px;
@@ -551,7 +577,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 12px rgba(6, 182, 212, 0.4);
 }
 
 .container p {
@@ -560,7 +586,7 @@ button[type="submit"]:hover {
 }
 
 .container p a {
-    color: #667eea;
+    color: #0891b2;
     text-decoration: none;
     font-weight: 600;
 }
@@ -571,12 +597,12 @@ button[type="submit"]:hover {
 
 /* Password Requirements */
 .password-requirements {
-    background: #f8f9fa;
+    background: #f0fdfa;
     padding: 15px;
     border-radius: 8px;
     text-align: left;
     margin: 10px 0;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #0891b2;
 }
 
 .password-requirements small {
@@ -604,7 +630,7 @@ button[type="submit"]:hover {
     content: "✓";
     position: absolute;
     left: 0;
-    color: #667eea;
+    color: #06b6d4;
     font-weight: bold;
 }
 
@@ -625,7 +651,7 @@ button[type="submit"]:hover {
 
 .logout {
     padding: 10px 25px;
-    background: #dc3545;
+    background: #f43f5e;
     color: white;
     text-decoration: none;
     border-radius: 50px;
@@ -634,13 +660,13 @@ button[type="submit"]:hover {
 }
 
 .logout:hover {
-    background: #c82333;
+    background: #e11d48;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+    box-shadow: 0 4px 8px rgba(244, 63, 94, 0.3);
 }
 
 .upload-section {
-    background: #f8f9fa;
+    background: #f0fdfa;
     padding: 30px;
     border-radius: 12px;
     margin-bottom: 30px;
