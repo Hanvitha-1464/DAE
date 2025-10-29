@@ -8,21 +8,21 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from PIL import Image
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-
-# Image quality metrics
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity, mean_squared_error
 
 # Flask setup
 app = Flask(__name__, static_folder='static', template_folder='templates')
 app.secret_key = 'supersecretkey'
 
-UPLOAD_FOLDER = os.path.join(app.static_folder, 'uploads')
+# ✅ Use a writable folder for uploads (works both locally & on Render)
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'static', 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB limit
 
-# Database setup
-DB_PATH = 'database/users.db'
-os.makedirs('database', exist_ok=True)
+# ✅ Database setup (use absolute path)
+DB_PATH = os.path.join(os.getcwd(), 'database', 'users.db')
+os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)
@@ -38,7 +38,6 @@ def init_db():
     conn.close()
 init_db()
 
-
 def add_user(name, email, username, password):
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -53,7 +52,6 @@ def add_user(name, email, username, password):
     conn.close()
     return True
 
-
 def verify_user(username, password):
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -64,14 +62,12 @@ def verify_user(username, password):
         return True
     return False
 
-
 def validate_username(username):
     if not username or len(username) < 3 or len(username) > 20:
         return False, "Username must be 3-20 characters"
     if not re.match(r'^[a-zA-Z0-9_]+$', username):
         return False, "Username can only contain letters, numbers, and underscores"
     return True, ""
-
 
 def validate_password(password):
     if not password or len(password) < 8:
@@ -84,7 +80,6 @@ def validate_password(password):
         return False, "Password must contain at least one digit"
     return True, ""
 
-
 def validate_email(email):
     if not email or len(email) < 5:
         return False, "Email is required"
@@ -93,14 +88,12 @@ def validate_email(email):
         return False, "Invalid email format"
     return True, ""
 
-
 def validate_name(name):
     if not name or len(name.strip()) < 2:
         return False, "Name must be at least 2 characters"
     if len(name) > 50:
         return False, "Name must be less than 50 characters"
     return True, ""
-
 
 def validate_image(file):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'bmp', 'tiff'}
@@ -121,11 +114,9 @@ def validate_image(file):
 
     return True, ""
 
-
-# Load ML model
-MODEL_PATH = os.path.join('model', 'denoising_autoencoder_cnn.keras')
+# ✅ Use absolute path for model
+MODEL_PATH = os.path.join(os.getcwd(), 'model', 'denoising_autoencoder_cnn.keras')
 model = load_model(MODEL_PATH)
-
 
 def preprocess_image_pil(img: Image.Image, size=(256,256)):
     img = img.convert('RGB')
@@ -133,24 +124,20 @@ def preprocess_image_pil(img: Image.Image, size=(256,256)):
     arr = img_to_array(img).astype('float32') / 255.0
     return np.expand_dims(arr, axis=0)
 
-
 def denoise_and_save(in_path, out_name='denoised.jpg'):
     """Returns: out_path (str), metrics (dict with PSNR, MSE, SSIM)"""
     img = Image.open(in_path).convert('RGB')
     original_size = img.size
 
-    # Process through model
     input_arr = preprocess_image_pil(img, size=(256,256))
     decoded = model.predict(input_arr)
     decoded = np.clip(decoded[0], 0.0, 1.0)
     decoded_img = Image.fromarray((decoded * 255).astype('uint8'))
 
-    # Resize back for saving
     decoded_img_resized = decoded_img.resize(original_size, Image.LANCZOS)
     out_path = os.path.join(app.config['UPLOAD_FOLDER'], out_name)
     decoded_img_resized.save(out_path)
 
-    # --- Compute metrics ---
     orig_resized = img.resize((256,256), Image.BICUBIC)
     recon_resized = decoded_img.resize((256,256), Image.BICUBIC)
     orig_arr = np.array(orig_resized).astype('float32') / 255.0
@@ -177,14 +164,11 @@ def denoise_and_save(in_path, out_name='denoised.jpg'):
 
     return out_path, metrics
 
-
-# Routes
 @app.route('/')
 def home():
     if 'username' in session:
         return redirect(url_for('denoise'))
     return render_template('homepage.html')
-
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -205,7 +189,6 @@ def login():
             flash("Invalid credentials", "danger")
     return render_template('login.html')
 
-
 @app.route('/signup', methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
@@ -216,24 +199,13 @@ def signup():
         confirm_password = request.form['confirm_password']
 
         valid, msg = validate_name(name)
-        if not valid:
-            flash(msg, "danger")
-            return render_template('signup.html')
-
+        if not valid: flash(msg, "danger"); return render_template('signup.html')
         valid, msg = validate_email(email)
-        if not valid:
-            flash(msg, "danger")
-            return render_template('signup.html')
-
+        if not valid: flash(msg, "danger"); return render_template('signup.html')
         valid, msg = validate_username(username)
-        if not valid:
-            flash(msg, "danger")
-            return render_template('signup.html')
-
+        if not valid: flash(msg, "danger"); return render_template('signup.html')
         valid, msg = validate_password(password)
-        if not valid:
-            flash(msg, "danger")
-            return render_template('signup.html')
+        if not valid: flash(msg, "danger"); return render_template('signup.html')
 
         if password != confirm_password:
             flash("Passwords do not match", "danger")
@@ -246,7 +218,6 @@ def signup():
         else:
             flash("Username or email already exists!", "danger")
     return render_template('signup.html')
-
 
 @app.route('/denoise', methods=['GET','POST'])
 def denoise():
@@ -278,13 +249,13 @@ def denoise():
                            output_image=output_url,
                            metrics=metrics)
 
-
 @app.route('/logout')
 def logout():
     session.pop('username', None)
     session.pop('name', None)
     return redirect(url_for('home'))
 
-
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000, debug=True)
+# ✅ Final Render-compatible run setup
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
